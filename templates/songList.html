@@ -1,0 +1,45 @@
+<h1 class="page-header">{{title}}</h1>
+<div id="musicTable">
+    <h3 class="sub-header">歌曲列表
+        <button  class="btn btn-default" ng-click="playItem(list)">播放全部</button>
+        <button  class="btn btn-default" ng-click="addToList(list)">全部加入</button>
+        <button  class="btn btn-default" ng-click="removeList()">清除列表</button>
+    </h3>
+
+    <div id="myTable">
+        <div class="thead">
+            <div class="th_index"  ></div>
+            <div class="th_title"  >标题</div>
+            <div class="th_seconds"   title="时长">时长</div>
+            <div class="th_singer"   title="歌手">歌手</div>
+        </div>
+
+        <!--加载对应的显示-->
+        <div class="loading" ng-hide="list.length">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+
+        <!--屏幕小于768px才有点击事件-->
+        <div class="tbody" ng-class="{bgc_odd:$index%2===0}" ng-repeat="item in list" ng-init="flag=false" ng-mousemove="flag=true" ng-mouseleave="flag=false" ng-click="clientWidth<768?playItem(item):0;$event.stopPropagation();">
+            <div class="td_index" >{{$index+1}}</div>
+
+            <div class="td_title" >
+                <!--显示前三项的图片，后面的判断是否有mousemove事件-->
+                <img ng-if="$index<3?$index<3:flag" ng-src="{{item.albumpic_small?item.albumpic_small:item.albumpic_big}}" alt="海报" width="90" height="90">
+                <a ui-sref="music.details({songid:item.songid,albummid:item.albummid})" ng-click="$event.stopPropagation()" class="music_title" title="{{item.songname}}">{{item.songname}}</a>
+                <div class="btns">
+                    <span class="play-icon icon-play-circled" title="播放" ng-click="playItem(item)"></span>
+                    <span class="play-icon icon-plus" title="添加到列表" ng-click="addToList(item)"></span>
+                    <span class="play-icon icon-download" title="下载" ng-click=""></span>
+                </div>
+            </div>
+            <div class="td_seconds" >{{item.seconds*1000 | date:'mm:ss'}}</div>
+            <div class="td_singer"  title="{{item.singername}}">{{item.singername}}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>音乐</title><link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.css"><link rel="stylesheet" href="./style/index.css"><!--播放器样式--><link rel="stylesheet" href="./style/player.css"></head><body ng-app="musicList"><!--头部开始--><nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="HomeController"><div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" ui-sref="music.home">音乐</a></div><form ng-submit="search()"><input type="text" class="form-control" placeholder="搜索..." ng-model="keyword"></form><div class="collapse-btn" ng-click="showOrHide()"><span></span><span></span><span></span></div></div><div class="lists container-fluid" ng-show="show_flag"><a ui-sref="music.tabs.list({id:27})" class="col-md-1 col-sm-2 col-xs-3">新歌</a> <a ui-sref="music.tabs.list({id:26})" class="col-md-1 col-sm-2 col-xs-3">热歌</a> <a ui-sref="music.tabs.list({id:4})" class="col-md-1 col-sm-2 col-xs-3">流行</a> <a ui-sref="music.tabs.list({id:5})" class="col-md-1 col-sm-2 col-xs-3">内地</a> <a ui-sref="music.tabs.list({id:6})" class="col-md-1 col-sm-2 col-xs-3">港台</a> <a ui-sref="music.tabs.list({id:3})" class="col-md-1 col-sm-2 col-xs-3">欧美</a> <a ui-sref="music.tabs.list({id:17})" class="col-md-1 col-sm-2 col-xs-3">日本</a> <a ui-sref="music.tabs.list({id:16})" class="col-md-1 col-sm-2 col-xs-3">韩国</a> <a ui-sref="music.tabs.list({id:36})" class="col-md-1 col-sm-2 col-xs-4">k歌金曲</a> <a ui-sref="music.tabs.list({id:28})" class="col-md-2 col-md-offset-0 col-sm-2 col-xs-4 col-xs-offset-2 col-sm-offset-2">网络歌曲</a></div></nav><!--头部结束--> <a href="javascript:scrollTo(0,0);" id="toTop" class="btn btn-default visible-lg"><span class="icon-up-open"></span></a><ui-view></ui-view><!--第三方库--><!--<script src="./lib/jquery/dist/jquery.min.js"></script>--><!--<script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>--><script src="./lib/angular/angular.js"></script><script src="./lib/angular-ui-router/release/angular-ui-router.min.js"></script><!--自定义的模块和脚本，gulp压缩合并混淆后只引用index.js--><script src="./script/index.js"></script><!--<script src="./script/home.js"></script>
+<script src="./script/route.js"></script>
+<script src="./script/songList.js"></script>
+<script src="./script/searchList.js"></script>
+<script src="./script/details.js"></script>
+<script src="./script/audio.js"></script>
+<script src="./script/service.js"></script>
+<script src="./script/config.js"></script>
+<script src="./script/player.js"></script>--><script>(function (window) {
+
+
+
+        //回到顶部
+        var toTop = document.getElementById('toTop');
+        window.onscroll = function () {
+            var scrollTop = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop || 0;
+//            console.log(scrollTop);
+            if (scrollTop > 200) {
+                toTop.className = 'btn btn-default';
+            } else {
+                toTop.className = 'btn btn-default hidden';
+            }
+        };
+        //全局上挂载一个触发hover的事件
+        window.hoverAndLeave = function (){
+            var player = document.getElementById('playerContainer');
+            player.classList.toggle('hover');
+            setTimeout(function(){
+                player.classList.toggle('hover');
+            },1000)
+        };
+
+        //
+    })(window);</script></body></html>
